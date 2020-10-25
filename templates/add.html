@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+PriceGolem :: Add Item
+{% endblock %}
+
+{% block content %}
+    <h1>Add your new Item to watch!</h1>
+    <form action="{{ url_for('add_submit') }}" method="post">
+        <label for="link">Link: </label><br>
+        <input type="text" name="link" id="link"><br>
+        <label for="price">Buy Price: </label><br>
+        <input type="text" name="price" id="price"><br>
+        <button type="submit">Add Item</button>
+    </form>
+{% endblock %}

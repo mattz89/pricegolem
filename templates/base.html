@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <h1>PriceGolem</h1>
+    <h3>Your favorite golem price checker :).</h3>
+    <nav>
+        <ul>
+            <a href="{{ url_for('index') }}"><li>Home</li></a>
+            <a href="{{ url_for('add') }}"><li>Add Item</li></a>
+            <form action="{{ url_for('test_price_check') }}" method="post">
+            <li><button type="submit">Refresh Prices</button></li>
+            </form>
+        </ul>
+    </nav>
+    {% block content %} {% endblock %}
+</body>
+</html>

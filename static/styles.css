@@ -1,0 +1,22 @@
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0;
+}
+nav li {
+    padding-right: 1rem;
+}
+.item {
+    display: flex;
+    flex-direction: row;
+}
+.item_image {
+    height: 200px;
+    padding: 0 1.5rem;
+}
