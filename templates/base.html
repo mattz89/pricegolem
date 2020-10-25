@@ -13,6 +13,10 @@
         <ul>
             <a href="{{ url_for('index') }}"><li>Home</li></a>
             <a href="{{ url_for('add') }}"><li>Add Item</li></a>
+            <a href="{{ url_for('login') }}"><li>Login</li></a>
+            <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+            <a href="{{ url_for('profile') }}"><li>Profile</li></a>
+            <a href="{{ url_for('signup') }}"><li>Signup</li></a>
             <form action="{{ url_for('test_price_check') }}" method="post">
             <li><button type="submit">Refresh Prices</button></li>
             </form>

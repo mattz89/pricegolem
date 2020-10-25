@@ -11,6 +11,8 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 db = SQLAlchemy(app)
 
+
+
 class Items(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
@@ -18,6 +20,12 @@ class Items(db.Model):
     imageurl = db.Column(db.String(255))
     buy_price = db.Column(db.String(255))
     link = db.Column(db.String(255))
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    name = db.Column(db.String(255))
 
 #homepage view
 @app.route('/')
@@ -61,3 +69,19 @@ def macbook():
 def update_prices():
     PriceChecker.price_check()
     print('Price Check job complete.')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@app.route('/logout')
+def logout():
+    return render_template('logout.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')

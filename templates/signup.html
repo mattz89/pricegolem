@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+PriceGolem :: Signup
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <form action="{{ url_for('login') }}" method="post">
+        <label for="email">Email: </label><br>
+        <input type="email" name="email" id="email"><br>
+        <label for="f_name">First Name: </label><br>
+        <input type="text" name="f_name" id="f_name"><br>
+        <label for="password">Password: </label><br>
+        <input type="password" name="password" id="password"><br>
+        <button type="submit">Login</button>
+    </form>
+    <hr>
+{% endblock %}
