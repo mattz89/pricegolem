@@ -79,6 +79,6 @@ def update_price(selling_price, id):
 def text_user(selling_price, buy_price, url):
     if selling_price <= buy_price:
         print("texted user")
-        Twilio.send_text(url, selling_price)
+        #Twilio.send_text(url, selling_price)
     else:
         print("still not cheap enough")
