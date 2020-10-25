@@ -8,7 +8,7 @@ class MainScraper():
 
         #use link to pull site content
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0'}
-        page = requests.get(url, headers=headers) #headers=headers
+        page = requests.get(url, headers=headers)
         self.soup = BeautifulSoup(page.content, 'html.parser')
 
     def title(self):
