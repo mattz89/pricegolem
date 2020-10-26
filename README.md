@@ -16,6 +16,16 @@ DATABASE_URL=sqlite:///db.sqlite3
 SECRET_KEY=makeupyourownsecretkeyhere
 ```
 
+To configure texting with Twilio add the following to your .env file:
+```
+# Twilio Keys:
+TWILIO_ACCOUNT_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_NUMBER=your_twilio_phone_number
+```
+
+Be sure to update the above values with your own information from twilio.com
+
 Mac / Linux commands (in order):
 ```
 pipenv install -r requirements.txt
@@ -32,17 +42,7 @@ Currently any item URL on bhphotovideo.com or ulta.com can be added along with y
 
 Support for other sites can be added by modifying Scraper.py and PriceChecker.py.
 
-To configure texting with Twilio add the following to your .env file:
-```
-# Twilio Keys:
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_NUMBER=your_twilio_phone_number
-```
-
-Be sure to update the above values with your own information from twilio.com
-
-You will also need to uncomment from PriceChecker.py:
+For texting to work, you will also need to uncomment from PriceChecker.py:
 ```
 #Twilio.send_text(url, selling_price)
 ```

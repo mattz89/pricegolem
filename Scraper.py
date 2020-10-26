@@ -6,7 +6,7 @@ class MainScraper():
 
     def __init__(self, url):
 
-        #use link to pull site content
+        # Use link to pull site content
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0'}
         page = requests.get(url, headers=headers)
         self.soup = BeautifulSoup(page.content, 'html.parser')
@@ -39,7 +39,7 @@ class BHPhoto(MainScraper):
         image_url = image_data['src']
         return image_url
 
-#working but low quality image - probably something to do with website being react based. 
+# Working but low quality image - probably something to do with website being react based. 
 class Ulta(MainScraper):
 
     def __init__(self, url):
@@ -61,7 +61,7 @@ class Ulta(MainScraper):
         return image_url
         
         
-#must use bestbuy API to scrape https://bestbuyapis.github.io/api-documentation/#response-format
+# Must use bestbuy API to scrape https://bestbuyapis.github.io/api-documentation/#response-format
 """ class BestBuy(MainScraper):
 
     def title(self, soup):
@@ -78,12 +78,12 @@ class Ulta(MainScraper):
         image_url = image_data['src']
         return image_url  """
 
-#walmart api should allow scraping: https://developer.walmartlabs.com/docs
+# Walmart api should allow scraping: https://developer.walmartlabs.com/docs
 # class Walmart(MainScraper):
 
 
-#working except for price block - need to investigate if there is an API or workaround
-#price block is in react stuffs :( - only way would be to use selenium likely
+# Working except for price block - need to investigate if there is an API or workaround
+# Price block is in react stuffs :( - only way would be to use selenium likely
 """ class Target(MainScraper):
 
     def __init__(self, url):
@@ -107,9 +107,9 @@ class Ulta(MainScraper):
         # print(f'Image Url: { image_url }')
         return image_url """
 
-#requires the passing of headers to scrape properly
-#amazon blocks scraping requests frequently as well :( need to find more reliable way
-#removing amazon scraping for now
+# Requires the passing of headers to scrape properly
+# Amazon blocks scraping requests frequently as well :( need to find more reliable way
+# Removing amazon scraping for now
 """ class Amazon(MainScraper):
 
     def __init__(self, url):
