@@ -1,4 +1,4 @@
-This app tracks the prices of items and sends a text message when the item reaches your desired 'buy price'.
+This Flask app tracks the prices of items and sends a text message when the item reaches your desired 'buy price'.
 
 
 To configure: 
