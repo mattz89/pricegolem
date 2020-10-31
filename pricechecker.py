@@ -1,10 +1,21 @@
-import requests, app, sqlite3, Scraper, Joke, Twilio
+# Standard Library Imports
+import requests 
+
+# Third Party Imports
+import sqlite3
+
+# Local Imports
+import app
+import scraper
+import joker
+import twiliotexter
 
 
 # Get items from DB
 def get_items():
     items = app.Items.query.all()
     return items
+
 
 # Run only when adding new item
 def create_item(link, buy_price):
@@ -26,23 +37,25 @@ def create_item(link, buy_price):
     app.db.session.add(item)
     app.db.session.commit()
 
+
 # Determine correct 'scraper' to use
 def site_check(url):
 
     if 'bhphotovideo.com' in url:
-        return Scraper.BHPhoto(url)
+        return scraper.BHPhoto(url)
     elif 'bestbuy.com' in url:
-        return Scraper.BestBuy(url)
+        return scraper.BestBuy(url)
     elif 'amazon.com' in url:
-        return Scraper.Amazon(url)
+        return scraper.Amazon(url)
     elif 'walmart.com' in url:
-        return Scraper.Walmart(url)
+        return scraper.Walmart(url)
     elif 'target.com' in url:
-        return Scraper.Target(url)
+        return scraper.Target(url)
     elif 'ulta.com' in url:
-        return Scraper.Ulta(url)
+        return scraper.Ulta(url)
     else:
         print('we no support you silly site.')
+
 
 def price_check():
     items = get_items()
@@ -69,16 +82,18 @@ def price_check():
             print(f"No Change in price for { item.title }")
 
     # Print joke for happiness
-    joke = Joke.get_joke()
+    joke = joker.get_joke()
     
+
 def update_price(selling_price, id):
     item = app.Items.query.get(id)
     item.selling_price = selling_price
     app.db.session.commit()
 
+
 def text_user(selling_price, buy_price, url):
     if selling_price <= buy_price:
         print("texted user")
-        #Twilio.send_text(url, selling_price)
+        twiliotexter.send_text(url, selling_price)
     else:
         print("still not cheap enough")

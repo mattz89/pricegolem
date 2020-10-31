@@ -1,4 +1,7 @@
-import PriceChecker, requests
+# Standard Library Imports
+import requests
+
+# Third Party Imports
 from bs4 import BeautifulSoup
 
 
@@ -20,6 +23,7 @@ class MainScraper():
     def image_url(self):
         raise NotImplementedError
 
+
 class BHPhoto(MainScraper):
 
     def __init__(self, url):
@@ -38,6 +42,7 @@ class BHPhoto(MainScraper):
         image_data = self.soup.find(**{'data-selenium': 'inlineMediaMainImage'})
         image_url = image_data['src']
         return image_url
+
 
 # Working but low quality image - probably something to do with website being react based. 
 class Ulta(MainScraper):
@@ -76,7 +81,8 @@ class Ulta(MainScraper):
     def image_url(self, soup):
         image_data = soup.find(**{'data-selenium': 'inlineMediaMainImage'})
         image_url = image_data['src']
-        return image_url  """
+        return image_url  
+"""
 
 # Walmart api should allow scraping: https://developer.walmartlabs.com/docs
 # class Walmart(MainScraper):
@@ -105,7 +111,8 @@ class Ulta(MainScraper):
         # print(f'Image Data: { image_data }')
         image_url = image_data.img['src']
         # print(f'Image Url: { image_url }')
-        return image_url """
+        return image_url 
+"""
 
 # Requires the passing of headers to scrape properly
 # Amazon blocks scraping requests frequently as well :( need to find more reliable way
@@ -130,4 +137,5 @@ class Ulta(MainScraper):
     def image_url(self):
         image_data = self.soup.find('img', **{'id': 'landingImage'})
         image_url = image_data['src']
-        return image_url  """
+        return image_url  
+"""

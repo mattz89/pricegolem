@@ -1,12 +1,17 @@
+# Standard Library Imports
 import os
+
+# Third Party Imports
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
+
 
 # Twilio Config
 twilio_sid = os.environ.get('TWILIO_ACCOUNT_SID')
 twilio_token = os.environ.get('TWILIO_AUTH_TOKEN')
 twilio_number = os.environ.get('TWILIO_NUMBER')
 client = Client(twilio_sid, twilio_token)
+
 
 # Twilio Sending Text
 def send_text(url, selling_price):
@@ -18,6 +23,7 @@ def send_text(url, selling_price):
         print("Text sent successfully")
     else:
         print("Failed to send.")
+
 
 # Twilio Validating Number to Text
 def is_valid_number(number):
