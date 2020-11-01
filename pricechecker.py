@@ -13,7 +13,7 @@ import twiliotexter
 
 # Get items from DB
 def get_items():
-    items = app.Items.query.all()
+    items = app.Item.query.all()
     return items
 
 
@@ -33,7 +33,7 @@ def create_item(link, buy_price):
     image_url = scraper.image_url()
 
     # Add completed item to db
-    item = app.Items(title=title, selling_price=selling_price, imageurl=image_url, buy_price=buy_price, link=url)
+    item = app.Item(title=title, selling_price=selling_price, imageurl=image_url, buy_price=buy_price, link=url)
     app.db.session.add(item)
     app.db.session.commit()
 
@@ -86,7 +86,7 @@ def price_check():
     
 
 def update_price(selling_price, id):
-    item = app.Items.query.get(id)
+    item = app.Item.query.get(id)
     item.selling_price = selling_price
     app.db.session.commit()
 

@@ -5,12 +5,14 @@ PriceGolem :: Add Item
 {% endblock %}
 
 {% block content %}
-    <h1>Add your new Item to watch!</h1>
-    <form action="{{ url_for('add_submit') }}" method="post">
-        <label for="link">Link: </label><br>
-        <input type="text" name="link" id="link"><br>
-        <label for="price">Buy Price: </label><br>
-        <input type="text" name="price" id="price"><br>
-        <button type="submit">Add Item</button>
-    </form>
+    <div class="auth-page">
+        <h2 class="content-header">Add Item:</h2>
+        <div class="auth-content">
+            <form action="{{ url_for('add_submit') }}" method="post">
+                <input type="text" name="link" id="link" placeholder="Link"><br>
+                <input type="text" name="price" id="price" placeholder="Buy Price"><br>
+                <button type="submit" class="submit">Add Item</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

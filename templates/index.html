@@ -5,19 +5,35 @@ PriceGolem :: Home
 {% endblock %}
 
 {% block content %}
-    <hr>
-    {% for item in items %}
-        <div class="item">
-            <div class="item_image">
-                <img src="{{ item['imageurl'] }}" alt="Image of {{ item['title'] }}" class="item_image">
+    <div class="hero">
+        <h2 class="content-header">
+            Welcome! Make an account, plox.
+        </h2>
+    </div>
+    <div class="item-boxes-container">
+        {% for item in items %}
+            <div class="spacer">
+                <a href="{{ item['link'] }}" target="_blank">
+                    <div class="item">
+                        <div class="item_image">
+                            <img src="{{ item['imageurl'] }}" alt="Image of {{ item['title'] }}" class="item_image">
+                        </div>
+                        <div class="item_details">
+                            <span class="subtitle">{{ item['title'] }}</span><br>
+                            <span>Buy Price: {{ item['buy_price'] }}</span><br>
+                            <span>Current Price: {{ item['selling_price'] }}</span>
+                            <div class="item-icon"><i class="fas fa-angle-double-right"></i></div>
+                        </div>
+                    </div>
+                </a>
+                    <div class="item-modifier">
+                        <div class="edit">
+                        </div>
+                        <div class="delete">
+                            <a href="">Delete</a>
+                        </div>
+                    </div>
             </div>
-            <div class="item_details">
-                <h2>{{ item['title'] }}</h2>
-                <p>Buy Price: {{ item['buy_price'] }}</p>
-                <p>Current Price: {{ item['selling_price'] }}</p>
-                <p>Link: <a href="{{ item['link'] }}" target="_blank">{{ item['title'] }}</a></p>
-            </div>
+        {% endfor %}
         </div>
-        <hr>
-    {% endfor %}
 {% endblock %}

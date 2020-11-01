@@ -5,15 +5,22 @@ PriceGolem :: Signup
 {% endblock %}
 
 {% block content %}
-    <hr>
-    <form action="{{ url_for('login') }}" method="post">
-        <label for="email">Email: </label><br>
-        <input type="email" name="email" id="email"><br>
-        <label for="f_name">First Name: </label><br>
-        <input type="text" name="f_name" id="f_name"><br>
-        <label for="password">Password: </label><br>
-        <input type="password" name="password" id="password"><br>
-        <button type="submit">Login</button>
-    </form>
-    <hr>
+    <div class="auth-page">
+        <h2 class="content-header">Sign Up:</h2>
+        <div class="auth-content"> 
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notify">
+                    {{ messages[0] }}. Go to <a href="{{ url_for('login') }}">login page</a>.
+                </div>
+            {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('signup') }}" method="POST">
+                <input type="text" name="name" id="name" placeholder="First Name"><br>
+                <input type="email" name="email" id="email" placeholder="Email"><br>
+                <input type="password" name="password" id="password" placeholder="Password"><br>
+                <button type="submit" class="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

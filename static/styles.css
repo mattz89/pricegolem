@@ -2,6 +2,20 @@ html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    background-color: #e0e1e7;
+    /*background-color: #00c4a7;*/
+    color: #41372e;
+}
+a {
+    text-decoration: none;
+}
+ul a {
+    text-decoration: none;
+    color: #00c4a7;
+}
+ul a:visited {
+    text-decoration: none;
+    color: #00c4a7;
 }
 nav ul {
     display: flex;
@@ -12,11 +26,136 @@ nav ul {
 nav li {
     padding-right: 1rem;
 }
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 0 140px;
+}
+.title {
+    font-size: 30px;
+    font-weight: 600;
+}
+.subtitle {
+    font-size: 20px;
+}
+.spacer {
+    margin: 10px;
+}
+.item-boxes-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin: 50px 150px;
+}
 .item {
     display: flex;
     flex-direction: row;
+    border-radius: 5px;
+    width: 500px;
+    align-items: center;
+    background-color: white;
+    color: #41372e;
+    font-size: 80%;
+    position: relative;
 }
 .item_image {
     height: 200px;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
+}
+.item_details {
+    text-decoration: none;
+}
+.item-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    text-align: right;
+    color: #00c4a7;
+}
+.item-modifier {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 10px;
+}
+.edit {
+}
+.delete {
+}
+.content-header {
+    text-align: center;
+}
+.auth-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px; 
+}
+.auth-content {
+    width: 320px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+input {
+    height: 40px;
+    width: 300px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 5px;
+    padding: 5px;
+}
+input:focus {
+    border: 2px solid #00c4a7;
+}
+.submit {
+    height: 50px;
+    width: 312px;
+    margin: 5px;
+    font-size: 18px;
+    background-color: #00c4a7;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+label {
+    color: #41372e;
+    margin: 5px;
+    padding: 5px;
+    vertical-align: middle;
+}
+#checkbox {
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    padding: 5px;
+    vertical-align: middle;
+}
+.hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px; 
+}
+.notify {
+    background-color: #FF3B63;
+    color: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+    width: 272px;
+    margin: 5px;
+}
+.notify a {
+    text-decoration: underline;
+    color: #FFFFFF;
 }
