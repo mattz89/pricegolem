@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+PriceGolem :: Login
+{% endblock %}
+
+{% block content %}
+    <div class="auth-page">
+        <h2 class="content-header">Login:</h2>
+        <div class="auth-content">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notify">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <form action="{{ url_for('login') }}" method="POST">
+                <input type="email" name="email" id="email" placeholder="Email"><br>
+                <input type="password" name="password" id="password" placeholder="Password"><br>
+                <label for="checkbox">Remember Me: </label>
+                <input type="checkbox" name="checkbox" id="checkbox"><br>
+                <button type="submit" class="submit">Login</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
