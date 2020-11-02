@@ -1,6 +1,6 @@
 This Flask app tracks the prices of items and sends a text message when the item reaches your desired 'buy price'.
 
-![gif-of-pricegolem-web-application](https://github.com/mattz89/pricegolem/tree/main/static/images/pricegolem.gif)
+![gif-of-pricegolem-web-application](static/images/pricegolem.gif)
 
 To configure: 
 
