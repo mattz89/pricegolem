@@ -4,7 +4,7 @@ This Flask app tracks the prices of items and sends a text message when the item
 
 To configure: 
 
-Prerequisites: Python3, pipenv
+Prerequisites: Python 3.8, pipenv
 
 Create a .env file in the root directory of the project with the following contents:
 ```
@@ -16,15 +16,6 @@ DATABASE_URL=sqlite:///db.sqlite3
 # Secret Key
 SECRET_KEY=makeupyourownsecretkeyhere
 ```
-
-To configure texting with Twilio add the following to your .env file:
-```
-# Twilio Keys:
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_NUMBER=your_twilio_phone_number
-```
-
 Be sure to update the above values with your own information from twilio.com
 
 Mac / Linux commands (in order):
@@ -41,10 +32,19 @@ The app will now be viewable on localhost:5000
 
 Currently any item URL on bhphotovideo.com or ulta.com can be added along with your desired buy price. 
 
-Support for other sites can be added by modifying Scraper.py and PriceChecker.py.
+Support for other sites can be added by modifying scraper.py and pricechecker.py.
 
-For texting to work, you will also need to uncomment from PriceChecker.py:
+To configure texting with Twilio add the following to your .env file:
 ```
+# Twilio Keys:
+TWILIO_ACCOUNT_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_NUMBER=your_twilio_phone_number
+```
+
+For texting to work, you will also need to uncomment from pricechecker.py:
+```
+#import twiliotexter
 #Twilio.send_text(url, selling_price)
 ```
 

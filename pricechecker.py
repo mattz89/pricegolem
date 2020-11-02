@@ -8,7 +8,7 @@ import sqlite3
 import app
 import scraper
 import joker
-import twiliotexter
+#import twiliotexter
 
 
 # Get items from DB
