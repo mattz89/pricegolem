@@ -45,6 +45,14 @@ def load_user(user_id):
 # ---------------
 # Models  
 # ---------------
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(100))
+    items = db.relationship('Item', backref='owner', lazy=True)
+
+
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
@@ -52,13 +60,7 @@ class Item(db.Model):
     imageurl = db.Column(db.String(255))
     buy_price = db.Column(db.String(255))
     link = db.Column(db.String(255))
-
-
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    email = db.Column(db.String(100), unique=True)
-    password = db.Column(db.String(100))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
 
 
 # ---------------
@@ -66,9 +68,16 @@ class User(UserMixin, db.Model):
 # ---------------
 @app.route('/')
 def index():
-    items = pricechecker.get_items()
+    
+    return render_template('index.html')
 
-    return render_template('index.html', items=items)
+
+@app.route('/items')
+@login_required
+def items():
+    items = current_user.items
+    
+    return render_template('items.html', items=items)
 
 
 # Html button to test price check function
@@ -76,7 +85,7 @@ def index():
 def test_price_check():
     pricechecker.price_check()
 
-    return redirect(url_for('index'))
+    return redirect(url_for('items'))
 
 
 # Add item page
@@ -91,9 +100,10 @@ def add():
 def add_submit():
     link = request.form['link']
     buy_price = request.form['price']
-    pricechecker.create_item(link, buy_price)
+    owner = current_user.id
+    pricechecker.create_item(link, buy_price, owner)
 
-    return redirect(url_for('index'))
+    return redirect(url_for('items'))
 
 
 # Add MBP to DB with higher price for testing refresh + text
@@ -139,7 +149,7 @@ def login_post():
 
     # If username and pass match - login
     login_user(user, remember=remember)
-    return redirect(url_for('profile'))
+    return redirect(url_for('items'))
 
 
 @app.route('/signup')

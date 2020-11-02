@@ -15,7 +15,12 @@
         </header>
         <nav>
             <ul>
+                {% if not current_user.is_authenticated %}
                 <a href="{{ url_for('index') }}"><li>Home</li></a>
+                {% endif %}
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('items') }}"><li>Home</li></a>
+                {% endif %}
                 {% if current_user.is_authenticated %}
                 <a href="{{ url_for('add') }}"><li>Add Item</li></a>
                 {% endif %}
@@ -31,9 +36,11 @@
                 {% if not current_user.is_authenticated %}
                 <a href="{{ url_for('signup') }}"><li>Signup</li></a>
                 {% endif %}
+                {% if current_user.is_authenticated %}
                 <form action="{{ url_for('test_price_check') }}" method="post">
                 <li><button type="submit">Refresh Prices</button></li>
                 </form>
+                {% endif %}
             </ul>
         </nav>
     </div>

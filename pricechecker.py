@@ -18,7 +18,7 @@ def get_items():
 
 
 # Run only when adding new item
-def create_item(link, buy_price):
+def create_item(link, buy_price, owner):
 
     # Take in data from website
     url = link
@@ -33,7 +33,7 @@ def create_item(link, buy_price):
     image_url = scraper.image_url()
 
     # Add completed item to db
-    item = app.Item(title=title, selling_price=selling_price, imageurl=image_url, buy_price=buy_price, link=url)
+    item = app.Item(title=title, selling_price=selling_price, imageurl=image_url, buy_price=buy_price, link=url, user_id=owner)
     app.db.session.add(item)
     app.db.session.commit()
 
@@ -94,6 +94,6 @@ def update_price(selling_price, id):
 def text_user(selling_price, buy_price, url):
     if selling_price <= buy_price:
         print("texted user")
-        twiliotexter.send_text(url, selling_price)
+        #twiliotexter.send_text(url, selling_price)
     else:
         print("still not cheap enough")
