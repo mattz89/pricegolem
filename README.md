@@ -16,7 +16,6 @@ DATABASE_URL=sqlite:///db.sqlite3
 # Secret Key
 SECRET_KEY=makeupyourownsecretkeyhere
 ```
-Be sure to update the above values with your own information from twilio.com
 
 Mac / Linux commands (in order):
 ```
@@ -41,6 +40,7 @@ TWILIO_ACCOUNT_SID=your_twilio_sid
 TWILIO_AUTH_TOKEN=your_twilio_auth_token
 TWILIO_NUMBER=your_twilio_phone_number
 ```
+Be sure to update the above values with your own information from twilio.com
 
 For texting to work, you will also need to uncomment from pricechecker.py:
 ```
