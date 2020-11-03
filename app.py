@@ -81,11 +81,13 @@ def items():
 
 
 # Html button to test price check function
-@app.route('/test_price_check', methods=['POST'])
+# To use, uncomment here, and on base.html
+# 'flask update-prices' is the new preferred way
+""" @app.route('/test_price_check', methods=['POST'])
 def test_price_check():
     pricechecker.price_check()
 
-    return redirect(url_for('items'))
+    return redirect(url_for('items')) """
 
 
 # Add item page
