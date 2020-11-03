@@ -17,6 +17,15 @@ DATABASE_URL=sqlite:///db.sqlite3
 SECRET_KEY=makeupyourownsecretkeyhere
 ```
 
+(Optional) To configure texting with Twilio add the following to your .env file:
+```
+# Twilio Keys:
+TWILIO_ACCOUNT_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_NUMBER=your_twilio_phone_number
+```
+Be sure to update the above values with your own information from twilio.com
+
 Mac / Linux commands (in order):
 ```
 pipenv install -r requirements.txt
@@ -33,19 +42,19 @@ Currently any item URL on bhphotovideo.com or ulta.com can be added along with y
 
 Support for other sites can be added by modifying scraper.py and pricechecker.py.
 
-To configure texting with Twilio add the following to your .env file:
+For the app to work without setting up Twilio, you will also need to comment out the following lines:
 ```
-# Twilio Keys:
-TWILIO_ACCOUNT_SID=your_twilio_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_NUMBER=your_twilio_phone_number
-```
-Be sure to update the above values with your own information from twilio.com
+From pricechecker.py
+import twiliotexter
+Twilio.send_text(url, selling_price)
 
-For texting to work, you will also need to uncomment from pricechecker.py:
-```
-#import twiliotexter
-#Twilio.send_text(url, selling_price)
+From app.py
+import twiliotexter
+valid_check = twiliotexter.is_valid_number(phone)
+    if valid_check == False:
+        flash('Phone number entered is not valid. We use this to text you price updates!')
+        return redirect(url_for('signup'))
+
 ```
 
 There is a command you can run from the environment shell 'flask update-prices'. This will update all of your item prices in the DB. You can create a cron job to run that command in the background (from the environment shell) as well. 
