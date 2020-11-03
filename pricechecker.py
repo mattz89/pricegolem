@@ -83,7 +83,7 @@ def price_check():
 
     # Print joke for happiness
     joke = joker.get_joke()
-    
+
 
 def update_price(selling_price, id):
     item = app.Item.query.get(id)

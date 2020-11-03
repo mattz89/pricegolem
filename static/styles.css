@@ -9,6 +9,10 @@ html {
 a {
     text-decoration: none;
 }
+.hero a:visited {
+    text-decoration: none;
+    color: #00c4a7;
+}
 ul a {
     text-decoration: none;
     color: #00c4a7;

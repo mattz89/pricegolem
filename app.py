@@ -80,16 +80,6 @@ def items():
     return render_template('items.html', items=items)
 
 
-# Html button to test price check function
-# To use, uncomment here, and on base.html
-# 'flask update-prices' is the new preferred way
-""" @app.route('/test_price_check', methods=['POST'])
-def test_price_check():
-    pricechecker.price_check()
-
-    return redirect(url_for('items')) """
-
-
 # Add item page
 @app.route('/add')
 def add():
@@ -105,6 +95,16 @@ def add_submit():
     owner = current_user.id
     pricechecker.create_item(link, buy_price, owner)
 
+    return redirect(url_for('items'))
+
+
+# Add item page
+@app.route('/delete/<int:item_id>', methods=['POST'])
+def delete(item_id):
+    item = Item.query.filter_by(id=item_id).first()
+    db.session.delete(item)
+    db.session.commit()
+    
     return redirect(url_for('items'))
 
 
