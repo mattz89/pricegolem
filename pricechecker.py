@@ -61,11 +61,7 @@ def price_check():
     items = get_items()
     
     for item in items:
-
-        # Get phone number of User that owns item for texting
-        user = app.User.query.filter_by(id=item.user_id).first()
-        phone = user.phone
-
+        item_owner = item.user_id
         current_price = float(item.selling_price)
 
         # Determine site for data scraping
@@ -80,7 +76,7 @@ def price_check():
             print(f"{ item.title } is now { selling_price }")
 
             # If new price is less than buy price text user
-            text_user(selling_price, float(item.buy_price), item.link, phone)
+            text_user(selling_price, float(item.buy_price), item.link, item_owner)
 
         else:
             print(f"No Change in price for { item.title }")
@@ -95,8 +91,11 @@ def update_price(selling_price, id):
     app.db.session.commit()
 
 
-def text_user(selling_price, buy_price, url, phone):
+def text_user(selling_price, buy_price, url, item_owner):
     if selling_price <= buy_price:
+        # Get phone number of User that owns item for texting
+        user = app.User.query.filter_by(id=item_owner).first()
+        phone = user.phone
         print(f"texted { phone }")
         twiliotexter.send_text(url, selling_price, phone)
     else:
