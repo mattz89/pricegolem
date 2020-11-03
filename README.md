@@ -44,11 +44,11 @@ Support for other sites can be added by modifying scraper.py and pricechecker.py
 
 For the app to work without setting up Twilio, you will also need to comment out the following lines:
 ```
-From pricechecker.py
+From pricechecker.py:
 import twiliotexter
-Twilio.send_text(url, selling_price)
+twiliotexter.send_text(url, selling_price, phone)
 
-From app.py
+From app.py:
 import twiliotexter
 valid_check = twiliotexter.is_valid_number(phone)
     if valid_check == False:
