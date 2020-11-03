@@ -8,7 +8,7 @@ import sqlite3
 import app
 import scraper
 import joker
-#import twiliotexter
+import twiliotexter
 
 
 # Get items from DB
@@ -62,6 +62,10 @@ def price_check():
     
     for item in items:
 
+        # Get phone number of User that owns item for texting
+        user = app.User.query.filter_by(id=item.user_id).first()
+        phone = user.phone
+
         current_price = float(item.selling_price)
 
         # Determine site for data scraping
@@ -76,7 +80,7 @@ def price_check():
             print(f"{ item.title } is now { selling_price }")
 
             # If new price is less than buy price text user
-            text_user(selling_price, float(item.buy_price), item.link)
+            text_user(selling_price, float(item.buy_price), item.link, phone)
 
         else:
             print(f"No Change in price for { item.title }")
@@ -91,9 +95,9 @@ def update_price(selling_price, id):
     app.db.session.commit()
 
 
-def text_user(selling_price, buy_price, url):
+def text_user(selling_price, buy_price, url, phone):
     if selling_price <= buy_price:
-        print("texted user")
-        #twiliotexter.send_text(url, selling_price)
+        print(f"texted { phone }")
+        twiliotexter.send_text(url, selling_price, phone)
     else:
         print("still not cheap enough")

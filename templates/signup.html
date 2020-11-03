@@ -11,13 +11,14 @@ PriceGolem :: Signup
             {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="notify">
-                    {{ messages[0] }}. Go to <a href="{{ url_for('login') }}">login page</a>.
+                    {{ messages[0] }}
                 </div>
             {% endif %}
             {% endwith %}
             <form action="{{ url_for('signup') }}" method="POST">
                 <input type="text" name="name" id="name" placeholder="First Name"><br>
                 <input type="email" name="email" id="email" placeholder="Email"><br>
+                <input type="tel" name="phone" id="phone" placeholder="Phone"><br>
                 <input type="password" name="password" id="password" placeholder="Password"><br>
                 <button type="submit" class="submit">Sign Up</button>
             </form>

@@ -14,8 +14,7 @@ client = Client(twilio_sid, twilio_token)
 
 
 # Twilio Sending Text
-def send_text(url, selling_price):
-    phone = '17172616651'
+def send_text(url, selling_price, phone):
     valid_check = is_valid_number(phone)
     message = f"Price changed to { selling_price }! Buy now: \n { url }"
     if valid_check == True:

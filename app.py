@@ -18,6 +18,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 # Local Imports
 import pricechecker
+import twiliotexter
 
 
 
@@ -48,6 +49,7 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(255))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
+    phone = db.Column(db.String(25))
     items = db.relationship('Item', backref='owner', lazy=True)
 
 
@@ -107,11 +109,12 @@ def add_submit():
 # Add MBP to DB with higher price for testing refresh + text
 @app.route('/macbook')
 def macbook():
-    item = Item(title='Macbook Pro', selling_price='1550', imageurl='https://static.bhphoto.com/images/images500x500/apple_mxk32ll_a_13_3_macbook_pro_with_1588701104_1560523.jpg', buy_price='1300', link='https://www.bhphotovideo.com/c/product/1560523-REG/apple_mxk32ll_a_13_3_macbook_pro_with.html')
+    owner = current_user.id
+    item = Item(title='Macbook Pro', selling_price='1550', imageurl='https://static.bhphoto.com/images/images500x500/apple_mxk32ll_a_13_3_macbook_pro_with_1588701104_1560523.jpg', buy_price='1300', link='https://www.bhphotovideo.com/c/product/1560523-REG/apple_mxk32ll_a_13_3_macbook_pro_with.html', user_id=owner)
     db.session.add(item)
     db.session.commit()
 
-    return redirect(url_for('index'))
+    return redirect(url_for('items'))
 
 
 # Creates CLI command that updates prices with 'flask update-prices'
@@ -159,17 +162,29 @@ def signup():
 def signup_post():
     name = request.form['name']
     email = request.form['email']
+    phone = request.form['phone']
     password = request.form['password']
 
+    # Check if phone is valid (requires twilio setup)
+    valid_check = twiliotexter.is_valid_number(phone)
+    if valid_check == False:
+        flash('Phone number entered is not valid. We use this to text you price updates!')
+        return redirect(url_for('signup'))
+    
     # Check if user exists
     user = User.query.filter_by(email=email).first()
+    user_phone = User.query.filter_by(phone=phone).first()
 
     if user:
-        flash('Email address already exists')
+        flash('Email address already exists. Please login, or try a different email.')
+        return redirect(url_for('signup'))
+    
+    if user_phone:
+        flash('Phone Number already exists. Please login, or try a different number.')
         return redirect(url_for('signup'))
 
     # Create a new user with form data
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'), phone=phone)
 
     # Add user to database
     db.session.add(new_user)
