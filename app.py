@@ -68,16 +68,11 @@ class Item(db.Model):
 # ---------------
 @app.route('/')
 def index():
+    if current_user.is_authenticated:
+        items = current_user.items
+        return render_template('index.html', items=items)
     
     return render_template('index.html')
-
-
-@app.route('/items')
-@login_required
-def items():
-    items = current_user.items
-    
-    return render_template('items.html', items=items)
 
 
 # Add item page
@@ -95,7 +90,7 @@ def add_submit():
     owner = current_user.id
     pricechecker.create_item(link, buy_price, owner)
 
-    return redirect(url_for('items'))
+    return redirect(url_for('index'))
 
 
 # Add item page
@@ -105,7 +100,7 @@ def delete(item_id):
     db.session.delete(item)
     db.session.commit()
     
-    return redirect(url_for('items'))
+    return redirect(url_for('index'))
 
 
 # Add MBP to DB with higher price for testing refresh + text
@@ -116,7 +111,7 @@ def macbook():
     db.session.add(item)
     db.session.commit()
 
-    return redirect(url_for('items'))
+    return redirect(url_for('index'))
 
 
 # Creates CLI command that updates prices with 'flask update-prices'
@@ -152,7 +147,7 @@ def login_post():
 
     # If username and pass match - login
     login_user(user, remember=remember)
-    return redirect(url_for('items'))
+    return redirect(url_for('index'))
 
 
 @app.route('/signup')

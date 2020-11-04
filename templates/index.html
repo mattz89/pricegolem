@@ -5,37 +5,47 @@ PriceGolem :: Home
 {% endblock %}
 
 {% block content %}
-    <div class="hero">
-        <h2 class="content-header">
-            Welcome! Make an account, plox.
-        </h2>
-    </div>
-    {% if current_user.is_authenticated %}
-    <div class="item-boxes-container">
-        {% for item in items %}
-            <div class="spacer">
-                <a href="{{ item['link'] }}" target="_blank">
-                    <div class="item">
-                        <div class="item_image">
-                            <img src="{{ item['imageurl'] }}" alt="Image of {{ item['title'] }}" class="item_image">
-                        </div>
-                        <div class="item_details">
-                            <span class="subtitle">{{ item['title'] }}</span><br>
-                            <span>Buy Price: {{ item['buy_price'] }}</span><br>
-                            <span>Current Price: {{ item['selling_price'] }}</span>
-                            <div class="item-icon"><i class="fas fa-angle-double-right"></i></div>
-                        </div>
-                    </div>
-                </a>
-                    <div class="item-modifier">
-                        <div class="edit">
-                        </div>
-                        <div class="delete">
-                            <a href="">Delete</a>
-                        </div>
-                    </div>
-            </div>
-        {% endfor %}
+    {% if not current_user.is_authenticated %}
+        <div class="hero">
+            <h2 class="content-header">
+                Welcome! Make an account, plox.
+            </h2>
         </div>
+    {% endif %}
+    {% if current_user.is_authenticated %}
+        {% if items %}
+            <div class="item-boxes-container">
+                {% for item in items %}
+                    <div class="spacer">
+                        <a href="{{ item.link }}" target="_blank">
+                            <div class="item">
+                                <div class="item_image">
+                                    <img src="{{ item.imageurl }}" alt="Image of {{ item.title }}" class="item_image">
+                                </div>
+                                <div class="item_details">
+                                    <span class="subtitle">{{ item.title }}</span><br>
+                                    <span>Buy Price: {{ item.buy_price }}</span><br>
+                                    <span>Current Price: {{ item.selling_price }}</span>
+                                    <div class="item-icon"><i class="fas fa-angle-double-right"></i></div>
+                                </div>
+                            </div>
+                        </a>
+                            <div class="item-modifier">
+                                <div class="edit">
+                                </div>
+                                <div class="delete">
+                                    <form action="/delete/{{ item.id }}" method="post">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="hero">
+                <p>You haven't added any items yet. Head over to the <a href="/add">'Add Item Page'</a> to add your first item!</p>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}
