@@ -16,10 +16,10 @@ PriceGolem :: Signup
             {% endif %}
             {% endwith %}
             <form action="{{ url_for('signup') }}" method="POST">
-                <input type="text" name="name" id="name" placeholder="First Name"><br>
-                <input type="email" name="email" id="email" placeholder="Email"><br>
-                <input type="tel" name="phone" id="phone" placeholder="Phone"><br>
-                <input type="password" name="password" id="password" placeholder="Password"><br>
+                <input type="text" name="name" id="name" placeholder="First Name" required="yes"><br>
+                <input type="email" name="email" id="email" placeholder="Email" required="yes"><br>
+                <input type="tel" name="phone" id="phone" placeholder="Phone" required="yes"><br>
+                <input type="password" name="password" id="password" placeholder="Password" required="yes"><br>
                 <button type="submit" class="submit">Sign Up</button>
             </form>
         </div>

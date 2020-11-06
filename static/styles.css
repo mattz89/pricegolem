@@ -117,10 +117,14 @@ nav li {
     margin-top: 50px; 
 }
 .auth-content {
-    width: 320px;
+    width: 340px;
     background-color: white;
     border-radius: 5px;
     padding: 10px;
+}
+form {
+    margin: 20px 10px;
+
 }
 input {
     height: 40px;
@@ -143,6 +147,7 @@ input:focus {
     color: white;
     border-radius: 5px;
     border: none;
+    margin-top: 25px;
 }
 label {
     color: #41372e;
@@ -175,4 +180,12 @@ label {
 .notify a {
     text-decoration: underline;
     color: #FFFFFF;
+}
+.fix-login {
+    text-align: center;
+    font-size: 12px;
+}
+.fix-login a:visited {
+    text-decoration: none;
+    color: #00c4a7;
 }
